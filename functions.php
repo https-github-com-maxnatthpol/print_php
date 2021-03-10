@@ -1,13 +1,16 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 
-if ($_GET['_method'] == 'printslip_return_card') {
-	printslip_return_card($_GET["ip"],$_GET["printname"],$_GET["data"]);
-	exit;
+if (isset($_POST['print'])) {
+	if ($_POST['print'] == "printslip_return_card") {
+		printslip_return_card();
+		exit;
+	}
 }
 
-function printslip_return_card($ip,$printname,$data)
+function printslip_return_card()
 {
-  $printer = '\\\\'.$ip.'\\'.$printname;
+  $printer = '\\\\'.$_POST["ip"].'\\'.$_POST["printname"];
   if($handle = printer_open($printer)){
 
       printer_set_option($handle, PRINTER_COPIES, 1);
@@ -27,7 +30,7 @@ function printslip_return_card($ip,$printname,$data)
       $text = "FoodCourt";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(7));
-      $text = "TAX 0000000000000 ($data)";
+      $text = "TAX 0000000000000 (".$_POST["data"].")";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(11));
       $text = "ใบเสร็จรับเงิน/ใบกำกับภาษีอย่างย่อ";
