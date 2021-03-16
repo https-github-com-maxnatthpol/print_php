@@ -181,9 +181,9 @@ function printslip_return_customer_his()
 	date_default_timezone_set("Asia/Bangkok");
 	//data
 	$date_regdate = date("Y-m-d H:i:s");
-	$amount_f = $_POST["amount_f"];
-	$receive_money = $_POST["receive_money"];
-	$SESSION_name = $_POST["SESSION_name"];
+	$amount_f = 555;
+	$receive_money = 5555;
+	$SESSION_name = 5555;
 
   $printer = '\\\\'.$_POST["ip"].'\\'.$_POST["printname"];
   if($handle = printer_open($printer)){
