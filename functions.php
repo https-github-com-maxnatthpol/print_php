@@ -247,7 +247,7 @@ function printslip_return_customer_his()
       $text = "---------------------------------------------------";
       $text = iconv("UTF-8","TIS-620",$text);
       
-      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(19));
+      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(19));
         $text = "เลขบัตร";
       $text = iconv("UTF-8","TIS-620",$text);
       
@@ -285,11 +285,11 @@ function printslip_return_customer_his()
 			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(34));
 			$text = "สโมสร กก. ตชด 22";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(36));
+			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(37));
 
 			$text = "-";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(40));
+			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(41));
 
 
       printer_delete_font($font);
