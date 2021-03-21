@@ -208,6 +208,7 @@ function printslip_return_customer_his()
 	$balance       = $_POST['balance'];
 	$total_card_s  = $_POST["total_card_s"];
 	$name_shop     = $_POST["name_shop"];
+    $ref_p = substr($_GET["ref_p"], 0 ,4);
 
   $printer = '\\\\'.$_POST["ip"].'\\'.$_POST["printname"];
   if($handle = printer_open($printer)){
@@ -235,6 +236,9 @@ function printslip_return_customer_his()
       $text = "ผู้ออก : ".$name_shop;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(13));
+      $text = "รหัสอ้างอิง : ".$ref_p;
+      $text = iconv("UTF-8","TIS-620",$text);
+      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(15));
       $text = "เวลา : ".$date_regdate;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(15));
