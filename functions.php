@@ -204,24 +204,24 @@ function printslip_return_customer_his()
 {
 	date_default_timezone_set("Asia/Bangkok");
 	//data
-	$date_regdate = date("Y-m-d H:i:s");
-	$amount_f = 555;
-	$receive_money = 5555;
-	$SESSION_name = 5555;
+	$date_regdate  = date("Y-m-d H:i:s");
+	$balance       = $_POST['balance'];
+	$total_card_s  = $_POST["total_card_s"];
+	$name_shop     = $_POST["name_shop"];
 
   $printer = '\\\\'.$_POST["ip"].'\\'.$_POST["printname"];
   if($handle = printer_open($printer)){
 
       printer_set_option($handle, PRINTER_COPIES, 1);
       printer_set_option($handle, PRINTER_MODE, 'text');
-      printer_set_option($handle, PRINTER_TITLE, 'printslip_buy_card');
+      printer_set_option($handle, PRINTER_TITLE, 'printslip_return_customer_his');
       printer_set_option($handle, PRINTER_SCALE, 100);
       printer_set_option($handle, PRINTER_ORIENTATION, PRINTER_ORIENTATION_PORTRAIT);
       printer_set_option($handle, PRINTER_PAPER_FORMAT, PRINTER_FORMAT_A4);
 
       printer_set_option($handle, PRINTER_TEXT_ALIGN, PRINTER_TA_LEFT);
 
-      printer_start_doc($handle, "printslip_buy_card");
+      printer_start_doc($handle, "printslip_return_customer_his");
       printer_start_page($handle);
 
       $font = printer_create_font("TH Sarabun New", dpimm2px(2.3), dpimm2px(0), PRINTER_FW_BOLD, false, false, false, 0);
@@ -232,10 +232,10 @@ function printslip_return_customer_his()
       $text = "ศูนย์อาหาร สโมสร กก. ตชด 22";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(1), dpimm2px(9));
-      $text = "ผู้รับเงิน : ".$SESSION_name;
+      $text = "ผู้ออก : ".$name_shop;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(13));
-			$text = "เวลา : ".$date_regdate;
+      $text = "เวลา : ".$date_regdate;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(15));
 
@@ -246,19 +246,19 @@ function printslip_return_customer_his()
 			$text = "จำนวนเงิน";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(19));
-			$text = "B".number_format($amount_f, 2, '.', '');
+			$text = "฿".number_format($total_card_s, 2, '.', '');
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(19));
-			$text = "เงินที่ได้รับ";
+			$text = "เงินที่ชำระ";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(21));
-			$text = "B".number_format($receive_money, 2, '.', '');
+			$text = "฿".number_format($balance, 2, '.', '');
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(21));
-			$text = "เงินทอน";
+			$text = "เงินคงเหลือ";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(23));
-			$text = "B".number_format($receive_money-$amount_f, 2, '.', '');
+			$text = "฿".number_format($total_card_s-$balance, 2, '.', '');
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(23));
 			$text = "---------------------------------------------------";
