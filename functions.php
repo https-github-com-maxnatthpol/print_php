@@ -21,6 +21,8 @@ function printslip_buy_card()
 	$date_regdate = date("Y-m-d H:i:s");
 	$amount_f = $_POST["amount_f"];
 	$receive_money = $_POST["receive_money"];
+	$number = str_pad($_GET["number"], 4, "0", STR_PAD_LEFT);
+	$ref = substr($_GET["ref"], 0 ,4);
 	$SESSION_name = $_POST["SESSION_name"];
 
   $printer = '\\\\'.$_POST["ip"].'\\'.$_POST["printname"];
@@ -40,55 +42,64 @@ function printslip_buy_card()
 
       $font = printer_create_font("TH Sarabun New", dpimm2px(2.3), dpimm2px(0), PRINTER_FW_BOLD, false, false, false, 0);
       printer_select_font($handle, $font);
-      $text = "ใบเสร็จรับเงิน";
+      $text = "ใบเสร็จซื้อบัตร / เติมเงิน";
       $text = iconv("UTF-8","TIS-620",$text);
-      printer_draw_text($handle, $text, dpimm2px(5.1), dpimm2px(7));
+      printer_draw_text($handle, $text, dpimm2px(2.5), dpimm2px(7));
       $text = "ศูนย์อาหาร สโมสร กก. ตชด 22";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(1), dpimm2px(9));
-      $text = "ผู้รับเงิน : ".$SESSION_name;
+      $text = "ผู้ออก : ".$SESSION_name;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(13));
-			$text = "เวลา : ".$date_regdate;
+			$text = "รหัสอ้างอิง : ".$ref;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(15));
-
-      $text = "---------------------------------------------------";
+			$text = "เวลา : ".$date_regdate;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(17));
 
-			$text = "จำนวนเงิน";
+      $text = "---------------------------------------------------";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(19));
-			$text = "B".number_format($amount_f, 2, '.', '');
-      $text = iconv("UTF-8","TIS-620",$text);
-      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(19));
-			$text = "เงินที่ได้รับ";
+
+			$text = "เลขบัตร";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(21));
-			$text = "B".number_format($receive_money, 2, '.', '');
+			$text = $number;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(21));
+			$text = "จำนวนเงิน";
+      $text = iconv("UTF-8","TIS-620",$text);
+      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(25));
+			$text = "B".number_format($amount_f, 2, '.', '');
+      $text = iconv("UTF-8","TIS-620",$text);
+      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(25));
+			$text = "เงินที่ได้รับ";
+      $text = iconv("UTF-8","TIS-620",$text);
+      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(27));
+			$text = "B".number_format($receive_money, 2, '.', '');
+      $text = iconv("UTF-8","TIS-620",$text);
+      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(27));
 			$text = "เงินทอน";
       $text = iconv("UTF-8","TIS-620",$text);
-      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(23));
+      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(29));
 			$text = "B".number_format($receive_money-$amount_f, 2, '.', '');
       $text = iconv("UTF-8","TIS-620",$text);
-      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(23));
+      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(29));
 			$text = "---------------------------------------------------";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(25));
+			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(31));
 
 			$text = "ขอบคุณที่ใช้บริการ";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(29));
+			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(35));
 			$text = "สโมสร กก. ตชด 22";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(31));
+			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(37));
 
 			$text = "-";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(35));
+			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(41));
 
 
       printer_delete_font($font);
@@ -109,6 +120,9 @@ function printslip_return_card()
 	$amount_r = $_POST["amount_r"];
 	$SESSION_name = $_POST["SESSION_name"];
 
+	$number = str_pad($_GET["number"], 4, "0", STR_PAD_LEFT);
+	$ref = substr($_GET["ref"], 0 ,4);
+
   $printer = '\\\\'.$_POST["ip"].'\\'.$_POST["printname"];
   if($handle = printer_open($printer)){
 
@@ -126,44 +140,54 @@ function printslip_return_card()
 
       $font = printer_create_font("TH Sarabun New", dpimm2px(2.3), dpimm2px(0), PRINTER_FW_BOLD, false, false, false, 0);
       printer_select_font($handle, $font);
-      $text = "ใบเสร็จคืนเงิน";
+      $text = "ใบเสร็จคืนบัตร";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(5.1), dpimm2px(7));
-      $text = "ศูนย์อาหาร สโมสร กก. ตชด 22";
+			$text = "ศูนย์อาหาร สโมสร กก. ตชด 22";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(1), dpimm2px(9));
-      $text = "ผู้คืนเงิน : ".$SESSION_name;
+      $text = "ผู้ออก : ".$SESSION_name;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(13));
-			$text = "เวลา : ".$date_regdate;
+			$text = "รหัสอ้างอิง : ".$ref;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(15));
-
-      $text = "---------------------------------------------------";
+			$text = "เวลา : ".$date_regdate;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(17));
 
-			$text = "จำนวนเงินที่คืน";
+			$text = "---------------------------------------------------";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(19));
+
+			$text = "เลขบัตร";
+      $text = iconv("UTF-8","TIS-620",$text);
+      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(21));
+			$text = $number;
+      $text = iconv("UTF-8","TIS-620",$text);
+      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(21));
+
+			$text = "จำนวนเงินที่คืน";
+      $text = iconv("UTF-8","TIS-620",$text);
+      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(25));
 			$text = "B".number_format($amount_r, 2, '.', '');
       $text = iconv("UTF-8","TIS-620",$text);
-      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(19));
+      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(25));
 
 			$text = "---------------------------------------------------";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(21));
+			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(27));
 
 			$text = "ขอบคุณที่ใช้บริการ";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(25));
+			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(31));
 			$text = "สโมสร กก. ตชด 22";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(27));
+			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(33));
 
 			$text = "-";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(31));
+			printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(37));
 
 
       printer_delete_font($font);
