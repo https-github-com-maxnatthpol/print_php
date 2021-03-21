@@ -255,7 +255,7 @@ function printslip_return_customer_his()
 			$text = $card_code;
       $text = iconv("UTF-8","TIS-620",$text);
       
-      printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(21));
+      printer_draw_text($handle, $text, dpimm2px(11), dpimm2px(21));
 			$text = "ยอดเงินบัตร";
       $text = iconv("UTF-8","TIS-620",$text);
       
