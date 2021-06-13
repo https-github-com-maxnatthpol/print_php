@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header('Access-Control-Allow-Origin: *');
 
 if (isset($_POST['print'])) {
@@ -45,9 +45,9 @@ function printslip_buy_card()
       $text = "ใบเสร็จซื้อบัตร / เติมเงิน";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(2.5), dpimm2px(7));
-      $text = "ศูนย์อาหาร สโมสร กก. ตชด 22";
+      $text = "ศูนย์อาหารสโมสรดำรงราช";
       $text = iconv("UTF-8","TIS-620",$text);
-      printer_draw_text($handle, $text, dpimm2px(1), dpimm2px(9));
+      printer_draw_text($handle, $text, dpimm2px(2), dpimm2px(9));
       $text = "ผู้ออก : ".$SESSION_name;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(13));
@@ -93,9 +93,9 @@ function printslip_buy_card()
 			$text = "ขอบคุณที่ใช้บริการ";
 			$text = iconv("UTF-8","TIS-620",$text);
 			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(35));
-			$text = "สโมสร กก. ตชด 22";
+			$text = "สโมสรดำรงราช";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(37));
+			printer_draw_text($handle, $text, dpimm2px(4.6), dpimm2px(37));
 
 			$text = "-";
 			$text = iconv("UTF-8","TIS-620",$text);
@@ -143,9 +143,9 @@ function printslip_return_card()
       $text = "ใบเสร็จคืนบัตร";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(5.1), dpimm2px(7));
-			$text = "ศูนย์อาหาร สโมสร กก. ตชด 22";
+			$text = "ศูนย์อาหารสโมสรดำรงราช";
       $text = iconv("UTF-8","TIS-620",$text);
-      printer_draw_text($handle, $text, dpimm2px(1), dpimm2px(9));
+      printer_draw_text($handle, $text, dpimm2px(2), dpimm2px(9));
       $text = "ผู้ออก : ".$SESSION_name;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(13));
@@ -181,9 +181,9 @@ function printslip_return_card()
 			$text = "ขอบคุณที่ใช้บริการ";
 			$text = iconv("UTF-8","TIS-620",$text);
 			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(31));
-			$text = "สโมสร กก. ตชด 22";
+			$text = "สโมสรดำรงราช";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(33));
+			printer_draw_text($handle, $text, dpimm2px(4.6), dpimm2px(33));
 
 			$text = "-";
 			$text = iconv("UTF-8","TIS-620",$text);
@@ -231,9 +231,9 @@ function printslip_return_customer_his()
       $text = "ใบเสร็จรับเงิน";
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(5.1), dpimm2px(7));
-      $text = "ศูนย์อาหาร สโมสร กก. ตชด 22";
+      $text = "ศูนย์อาหารสโมสรดำรงราช";
       $text = iconv("UTF-8","TIS-620",$text);
-      printer_draw_text($handle, $text, dpimm2px(1), dpimm2px(9));
+      printer_draw_text($handle, $text, dpimm2px(2), dpimm2px(9));
       $text = "ผู้ออก : ".$name_shop;
       $text = iconv("UTF-8","TIS-620",$text);
       printer_draw_text($handle, $text, dpimm2px(0.1), dpimm2px(13));
@@ -283,9 +283,9 @@ function printslip_return_customer_his()
 			$text = "ขอบคุณที่ใช้บริการ";
 			$text = iconv("UTF-8","TIS-620",$text);
 			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(34));
-			$text = "สโมสร กก. ตชด 22";
+			$text = "สโมสรดำรงราช";
 			$text = iconv("UTF-8","TIS-620",$text);
-			printer_draw_text($handle, $text, dpimm2px(4.1), dpimm2px(36));
+			printer_draw_text($handle, $text, dpimm2px(4.6), dpimm2px(36));
 
 			$text = "-";
 			$text = iconv("UTF-8","TIS-620",$text);
